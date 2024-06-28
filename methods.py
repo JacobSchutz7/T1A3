@@ -2,7 +2,10 @@ from classes import Classes
 from data import *
 
 # Add a student to the cohort. 
-def add_student(name):
+def add_student():
+	first_name = get_valid_name("First name: ")
+	last_name = get_valid_name("Last name: ")
+	name = first_name + last_name
 	count = len(students)
 	students[count] = name
 
@@ -33,3 +36,14 @@ def remove_student_from_class(student_ID, class_title):
 # Print all students in a class
 def print_students_in_class(class_title):
 	print(list_of_classes.get(class_title).students)
+
+# Helper function for error handling
+def get_valid_name(prompt):
+	while True:
+		try: 
+			name = input(prompt)
+			if not name.isalpa():
+				raise ValueError("Numbers detected. Please input a valid name.")
+			return name
+		except ValueError as e:
+			print(f"Error: {e}")
