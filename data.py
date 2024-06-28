@@ -1,2 +1,2 @@
-students = { 0 : 'Jim Johnson', 1 : 'Steve Pollock'}
+students = {}
 list_of_classes = {}
