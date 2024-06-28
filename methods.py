@@ -1,7 +1,5 @@
 from classes import Classes
-
-students = { 0 : 'Jim Johnson', 1 : 'Steve Pollock'}
-list_of_classes = {}
+from data import *
 
 # Add a student to the cohort. 
 def add_student(name):
@@ -32,10 +30,6 @@ def remove_student_from_class(student_ID, class_title):
 	class_object = list_of_classes[class_title]
 	class_object.students.pop(student_ID)
 
-add_class("History")
-add_student_to_class(1, "History")
-print(list_of_classes.get("History").students)
-remove_student_from_class(1, "History")
-remove_student(1)
-print(students)
-print(list_of_classes.get("History").students)
+# Print all students in a class
+def print_students_in_class(class_title):
+	print(list_of_classes.get(class_title).students)
