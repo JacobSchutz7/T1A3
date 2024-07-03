@@ -17,6 +17,28 @@ def add_student():
 	else:
 		list_of_students.append(Student(name))
 
-# add students from a csv file
+# add students from a csv file.
 def add_students_from_file(file_name):
-	pass
+	try:
+		# open the file.
+		with open(file_name, "r", newline="") as students_file:
+			# create a student object for each entry in the csv file.
+			for row in students_file:
+				try:
+					new_student = Student(name = row["name"])
+					list_of_students.append(new_student)
+				# error handling for missing column (or improper formatting).
+				except KeyError as e:
+					print(f"Missing '{e}' column.")
+				# erro handling for other errors.
+				except Exception as e:
+					print(f"Error creating Student object: {e}")
+	# error handling for invalid file name.
+	except FileNotFoundError: 
+		print(f"File {file_name} not found.")
+	# erorr handling for reading errors.
+	except IOError:
+		print(f"Error reading file {file_name}")
+	# error handling for other errors.
+	except Exception as e:
+		print(f"Error: {e}")
