@@ -1,7 +1,7 @@
 from student import Student
 from assessment import Assessment
 from data import list_of_students
-from csv import *
+import csv
 
 # method to manually add a student
 def add_student():
@@ -18,19 +18,21 @@ def add_student():
 		list_of_students.append(Student(name))
 
 # add students from a csv file.
-def add_students_from_file(file_name):
+def add_students_from_file():
+	file_name = input("Enter file name: ")
 	try:
 		# open the file.
 		with open(file_name, "r", newline="") as students_file:
+			csv_reader = csv.DictReader(students_file)
 			# create a student object for each entry in the csv file.
-			for row in students_file:
+			for row in csv_reader:
 				try:
-					new_student = Student(name = row["name"])
+					new_student = Student(name = row['Name'])
 					list_of_students.append(new_student)
 				# error handling for missing column (or improper formatting).
 				except KeyError as e:
 					print(f"Missing '{e}' column.")
-				# erro handling for other errors.
+				# error handling for other errors.
 				except Exception as e:
 					print(f"Error creating Student object: {e}")
 	# error handling for invalid file name.
