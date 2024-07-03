@@ -1,6 +1,6 @@
 from student import Student
 from assessment import Assessment
-from data import list_of_students
+from data import list_of_students, list_of_assessments
 import csv
 
 # method to manually add a student
@@ -44,3 +44,15 @@ def add_students_from_file():
 	# error handling for other errors.
 	except Exception as e:
 		print(f"Error: {e}")
+
+def add_assessment():
+	# get input for the name of the assessment.
+	assessment_name = input("Enter assessment name: ")
+	# check that the assessment name isn't too long. 
+	if len(assessment_name) > 40:
+		print("Assessment name too long. Please enter a valid assessment name.")
+	else:
+		# create a new Assessment object
+		new_assessment = Assessment(assessment_name)
+		# add it to the list of assessment objects
+		list_of_assessments.append(new_assessment)
