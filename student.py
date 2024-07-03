@@ -3,6 +3,7 @@ class Student:
 		self.name = name
 		self.ID = 0
 		self.grade = 0
+		self.assessments = []
 	
 	def get_name(self):
 		return self.name
