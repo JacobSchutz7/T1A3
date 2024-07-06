@@ -1,11 +1,11 @@
 class Assessment:
-	def __init__(self, title, weight):
-		self.title = title
+	def __init__(self, name, weight):
+		self.name = name
 		self.marks = 0
 		self.weight = weight
 
-	def get_title(self):
-		return self.title
+	def get_name(self):
+		return self.name
 	
 	def get_marks(self):
 		return self.marks

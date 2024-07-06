@@ -86,6 +86,7 @@ def add_assessment():
 		for student in list_of_students:
 			student.assessments[assessment_name] = (Assessment(new_assessment))
 
+# a method for checking if an assessment exists.
 def does_assessment_exist(assessment_name):
 	for each in list_of_assessments:
 		if each.get_name() == assessment_name:
