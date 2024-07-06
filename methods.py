@@ -19,6 +19,7 @@ def add_student():
 
 # add students from a csv file.
 def add_students_from_file():
+	# get the file name from the user.
 	file_name = input("Enter file name: ")
 	try:
 		# open the file.
@@ -44,6 +45,20 @@ def add_students_from_file():
 	# error handling for other errors.
 	except Exception as e:
 		print(f"Error: {e}")
+
+# method to remove a student from the student list. 
+def remove_student():
+	# get input for ID of student to be removed.
+	remove_ID = int(input("Enter ID for student to be removd: "))
+	# check if ID exists.
+	does_ID_exist = any(student.ID == remove_ID for student in list_of_students)
+	if does_ID_exist:
+		# create a new list without the removed student and replace the old list.
+		list_of_students = [student for student in list_of_students if student.ID != remove_ID]
+		print(f"Student with ID {remove_ID} was removed.")
+	else:
+		# notify the user if the ID did not exist to begin with.
+		print(f"Student with ID {remove_ID} was not found.")
 
 def add_assessment():
 	# get input for the name of the assessment.
