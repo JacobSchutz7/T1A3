@@ -1,16 +1,16 @@
 from student import Student
 from assessment import Assessment
-from data import list_of_students, list_of_assessments
+from data import *
 import csv
 
-# method to manually add a student
+# method to manually add a student.
 def add_student():
-	# ask user for the name of the student
+	# ask user for the name of the student.
 	name = input("Enter name: ")
-	# check if name contains only letters
+	# check if name contains only letters.
 	if name.isalpha != True:
 		print("Numbers detected. Please enter a valid name.")
-	# check if name is too long
+	# check if name is too long.
 	elif len(name) > 40:
 		print("Name too long. Please enter a valid name.")
 	# if no errors, appends a new student object to the list of students using the input.
@@ -46,13 +46,26 @@ def add_students_from_file():
 	except Exception as e:
 		print(f"Error: {e}")
 
+# a method to add all students in the list to a dictionary. This is for lookup purposes. 
+def update_student_dict(dictionary):
+	# clear the dictionary to avoid using any outdated data.
+	dictionary.clear()
+	# fill the dictionary with data from the list of students. 
+	dictionary.update({student.ID: student for student in list_of_students})
+
+# a method to check if a student exists using their ID.
+def does_student_ID_exist(ID):
+	# use the any function to check the list for an ID that matches the given ID.
+	exist = any(student.ID == ID for student in list_of_students)
+	# returns true or false
+	return exist
+
 # method to remove a student from the student list. 
 def remove_student():
 	# get input for ID of student to be removed.
 	remove_ID = int(input("Enter ID for student to be removd: "))
 	# check if ID exists.
-	does_ID_exist = any(student.ID == remove_ID for student in list_of_students)
-	if does_ID_exist:
+	if does_student_ID_exist(remove_ID) == True:
 		# create a new list without the removed student and replace the old list.
 		list_of_students = [student for student in list_of_students if student.ID != remove_ID]
 		print(f"Student with ID {remove_ID} was removed.")
@@ -67,7 +80,29 @@ def add_assessment():
 	if len(assessment_name) > 40:
 		print("Assessment name too long. Please enter a valid assessment name.")
 	else:
-		# create a new Assessment object
+		# create a new Assessment object.
 		new_assessment = Assessment(assessment_name)
-		# add it to the list of assessment objects
+		# add it to the list of assessment objects.
 		list_of_assessments.append(new_assessment)
+		# add the new instance of the new assessment to each student.
+		for student in list_of_students:
+			student.assessments.append(Assessment(new_assessment))
+	
+def mark_assessment():
+	# get input for which student to mark.
+	student_ID = int(input("Enter student ID: "))
+	# get input for which assessment to mark.
+	assessment = input("Enter assessment: ")
+	# check the student_ID exists
+	if does_student_ID_exist(student_ID) == True:
+		# check if assessment exists and is assigned to the student
+		student_found = False
+		while student_found == False:
+			for student in list_of_students:
+				if student.get_ID() == student_ID:
+					if assessment in student.assessments:
+						mark = int(input("Enter mark for assessment: "))
+						assessment_index = student.assessments.index(assessment)
+						student.assessments[assessment_index].marks = mark
+	else:
+		print(f"Student with ID {student_ID} was not found.")
