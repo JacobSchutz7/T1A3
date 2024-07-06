@@ -5,3 +5,4 @@ from methods import *
 
 add_students_from_file()
 
+add_assessment()

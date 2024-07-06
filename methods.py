@@ -74,17 +74,19 @@ def remove_student():
 def add_assessment():
 	# get input for the name of the assessment.
 	assessment_name = input("Enter assessment name: ")
+	# get input for assessment weighting.
+	weight = int(input("Enter weight: "))
 	# check that the assessment name isn't too long. 
 	if len(assessment_name) > 40:
 		print("Assessment name too long. Please enter a valid assessment name.")
 	else:
 		# create a new Assessment object.
-		new_assessment = Assessment(assessment_name)
+		new_assessment = Assessment(assessment_name, weight)
 		# add it to the list of assessment objects.
 		list_of_assessments.append(new_assessment)
 		# add the new instance of the new assessment to each student.
 		for student in list_of_students:
-			student.assessments[assessment_name] = (Assessment(new_assessment))
+			student.assessments[assessment_name] = (Assessment(assessment_name, weight))
 
 # a method for checking if an assessment exists.
 def does_assessment_exist(assessment_name):
