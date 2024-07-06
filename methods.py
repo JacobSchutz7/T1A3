@@ -101,11 +101,11 @@ def mark_assessment():
 	# get input for which assessment to mark.
 	assessment_name = input("Enter assessment name: ")
 	# check the student_ID exists.
-	if not does_student_ID_exist():
-		print(f"Student ID {student_ID} not found.")
+	if not does_student_ID_exist(student_ID):
+		return f"Student ID {student_ID} not found."
 	# check if assessment exists.
-	if not does_assessment_exist():
-		print(f"Assessment '{assessment_name}' not found.")
+	if not does_assessment_exist(assessment_name):
+		return f"Assessment '{assessment_name}' not found."
 	try:
 		# get mark as user input.
 		mark = int(input("Enter mark: "))
@@ -118,4 +118,16 @@ def mark_assessment():
 		print("Invalid input. Please enter an integer between 0 and 100.")
 		return
 	# add the mark to the specified assessment.
-	dict_of_students[student_ID].assessment[assessment_name].set_marks(mark)
+	dict_of_students[student_ID].assessments[assessment_name].set_marks(mark)
+
+# a method to calculate the overall grade for all students
+def calculate_grade():
+	# iterate over all students
+	for each in list_of_students:
+		# set a variable in this layer so that it resets after each student
+		grade = 0
+		# iterate over each assessment for an individual student
+		for assessment in each.assessments:
+			grade += (assessment.mark * (assessment.weight / 100))
+		# assign the final grade
+		each.set_grade(grade)
