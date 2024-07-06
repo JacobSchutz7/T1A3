@@ -3,5 +3,6 @@ def menu():
 	print("1. Import Students")
 	print("2. Add Assessment")
 	print("3. Mark Assessment")
-	print("4. Exit")
+	print("4. Print Student Info")
+	print("0. Exit")
 	

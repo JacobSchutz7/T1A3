@@ -102,10 +102,12 @@ def mark_assessment():
 	assessment_name = input("Enter assessment name: ")
 	# check the student_ID exists.
 	if not does_student_ID_exist(student_ID):
-		return f"Student ID {student_ID} not found."
+		print(f"Student ID {student_ID} not found.")
+		return
 	# check if assessment exists.
 	if not does_assessment_exist(assessment_name):
-		return f"Assessment '{assessment_name}' not found."
+		print(f"Assessment '{assessment_name}' not found.")
+		return
 	try:
 		# get mark as user input.
 		mark = int(input("Enter mark: "))
@@ -131,3 +133,7 @@ def calculate_grade():
 			grade += (assessment.mark * (assessment.weight / 100))
 		# assign the final grade
 		each.set_grade(grade)
+
+def print_all_student_info():
+	for student in list_of_students:
+		print(f"Name: {student.get_name()} ID: {student.get_ID()} Grade: {student.get_grade()} ")
