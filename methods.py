@@ -54,11 +54,9 @@ def update_student_dict(dictionary):
 	dictionary.update({student.ID: student for student in list_of_students})
 
 # a method to check if a student exists using their ID.
-def does_student_ID_exist(ID):
-	# use the any function to check the list for an ID that matches the given ID.
-	exist = any(student.ID == ID for student in list_of_students)
-	# returns true or false
-	return exist
+def does_student_ID_exist(student_ID):
+	# returns true or false if the ID is a key in the student dictionary
+	return student_ID in dict_of_students
 
 # method to remove a student from the student list. 
 def remove_student():
@@ -86,23 +84,35 @@ def add_assessment():
 		list_of_assessments.append(new_assessment)
 		# add the new instance of the new assessment to each student.
 		for student in list_of_students:
-			student.assessments.append(Assessment(new_assessment))
+			student.assessments[assessment_name] = (Assessment(new_assessment))
+
+def does_assessment_exist(assessment_name):
+	for each in list_of_assessments:
+		if each.get_name() == assessment_name:
+			return True
+	return False
 	
 def mark_assessment():
 	# get input for which student to mark.
 	student_ID = int(input("Enter student ID: "))
 	# get input for which assessment to mark.
-	assessment = input("Enter assessment: ")
-	# check the student_ID exists
-	if does_student_ID_exist(student_ID) == True:
-		# check if assessment exists and is assigned to the student
-		student_found = False
-		while student_found == False:
-			for student in list_of_students:
-				if student.get_ID() == student_ID:
-					if assessment in student.assessments:
-						mark = int(input("Enter mark for assessment: "))
-						assessment_index = student.assessments.index(assessment)
-						student.assessments[assessment_index].marks = mark
-	else:
-		print(f"Student with ID {student_ID} was not found.")
+	assessment_name = input("Enter assessment name: ")
+	# check the student_ID exists.
+	if not does_student_ID_exist():
+		print(f"Student ID {student_ID} not found.")
+	# check if assessment exists.
+	if not does_assessment_exist():
+		print(f"Assessment '{assessment_name}' not found.")
+	try:
+		# get mark as user input.
+		mark = int(input("Enter mark: "))
+		# check if mark is valid
+		if mark < 0 or mark > 100:
+			print("Invalid mark. Must be an integer between 0 and 100.")
+			return
+	# error handling for value errors.
+	except ValueError:
+		print("Invalid input. Please enter an integer between 0 and 100.")
+		return
+	# add the mark to the specified assessment.
+	dict_of_students[student_ID].assessment[assessment_name].set_marks(mark)

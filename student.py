@@ -5,7 +5,7 @@ class Student:
 		self.ID = Student.student_ID_count
 		Student.student_ID_count += 1
 		self.grade = 0
-		self.assessments = []
+		self.assessments = {}
 	
 	def get_name(self):
 		return self.name
