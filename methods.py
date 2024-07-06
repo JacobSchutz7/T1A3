@@ -2,6 +2,7 @@ from student import Student
 from assessment import Assessment
 from data import *
 import csv
+import json
 
 # method to manually add a student.
 def add_student():
@@ -134,6 +135,31 @@ def calculate_grade():
 		# assign the final grade
 		each.set_grade(grade)
 
+# a method to print out info for all students
 def print_all_student_info():
+	# iterate over full list of students.
 	for student in list_of_students:
+		# use f string to print all the info.
 		print(f"Name: {student.get_name()} ID: {student.get_ID()} Grade: {student.get_grade()} ")
+
+# a method to write student info to an external file
+def write_report(file_name):
+	# store data to be written in here.
+	students_data = []
+	# iterate over all students.
+	for student in list_of_students:
+		# store data for each individual student here.
+		student_info = {
+			"Name": student.get_name(),
+			"ID": student.get_ID(),
+			"Assessments": [
+				{"Name": assessment.name, "Mark": assessment.get_marks(), "Weight": assessment.get_weight()} for name, assessment in student.assessments.items()
+			],
+			"Grade": student.get_grade()
+		}
+		# add data for the individual student to the data for the whole cohort.
+		students_data.append(student_info)
+	# write to new file
+	with open(file_name, "w") as file:
+		json.dump(students_data, file, indent = 4)
+	print(f"Student information has been written to {file_name}")

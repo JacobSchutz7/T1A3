@@ -1,0 +1,38 @@
+[
+    {
+        "Name": "Olivia Taylor",
+        "ID": 0,
+        "Assessments": [
+            {
+                "Name": "test1",
+                "Mark": 5,
+                "Weight": 10
+            }
+        ],
+        "Grade": 0
+    },
+    {
+        "Name": "Benjamin Williams",
+        "ID": 1,
+        "Assessments": [
+            {
+                "Name": "test1",
+                "Mark": 0,
+                "Weight": 10
+            }
+        ],
+        "Grade": 0
+    },
+    {
+        "Name": "Sophia Johnson",
+        "ID": 2,
+        "Assessments": [
+            {
+                "Name": "test1",
+                "Mark": 0,
+                "Weight": 10
+            }
+        ],
+        "Grade": 0
+    }
+]
