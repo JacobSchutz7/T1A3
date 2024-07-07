@@ -9,6 +9,7 @@ import statistics as stats
 from student import Student
 from assessment import Assessment
 from data import *
+from utility import *
 
 # method to manually add a student.
 def add_student():
@@ -27,7 +28,7 @@ def add_student():
 # add students from a csv file.
 def add_students_from_file():
 	# get the file name from the user.
-	file_name = "data_files/" + input("Enter file name: ")
+	file_name = get_path("data_files") + input("Enter file name: ")
 	try:
 		# open the file.
 		with open(file_name, "r", newline="") as students_file:
@@ -99,7 +100,8 @@ def does_assessment_exist(assessment_name):
 		if each.get_name() == assessment_name:
 			return True
 	return False
-	
+
+# a method to assign a mark to an assessment.
 def mark_assessment():
 	# get input for which student to mark.
 	student_ID = int(input("Enter student ID: "))
@@ -152,7 +154,9 @@ def print_all_student_info():
 		print(f"The mean grade of the class is: {mean}")
 
 # a method to write student info to an external file
-def write_report(file_name):
+def write_report():
+	# get the file path to the repost.json file
+	file_name = get_path("data_files/report.json")
 	# calculate grades before writing reports
 	calculate_grade()
 	# store data to be written in here.

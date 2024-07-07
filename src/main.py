@@ -1,6 +1,7 @@
 from data import *
 from methods import *
 from menu import menu
+from utility import *
 
 def main():
 	# use a while loop to keep the program running until the users exits.
@@ -26,4 +27,5 @@ def main():
 			case _:
 				print("Invalid choice. Please try again.")
 
-main()
+if __name__ == "__main__":
+	main()
