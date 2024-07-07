@@ -1,9 +1,14 @@
+# this file contains all the methods for the program
+# that do not belong to a class.
+
+# library imports
+import csv
+import json
+import statistics as stats
+# file imports
 from student import Student
 from assessment import Assessment
 from data import *
-import csv
-import json
-import statistics
 
 # method to manually add a student.
 def add_student():
@@ -15,7 +20,7 @@ def add_student():
 	# check if name is too long.
 	elif len(name) > 40:
 		print("Name too long. Please enter a valid name.")
-	# if no errors, appends a new student object to the list of students using the input.
+	# if no errors, append new student object to list of students using the input.
 	else:
 		list_of_students.append(Student(name))
 
@@ -32,7 +37,7 @@ def add_students_from_file():
 				try:
 					new_student = Student(name = row['Name'])
 					list_of_students.append(new_student)
-				# error handling for missing column (or improper formatting).
+				# error handling for missing column.
 				except KeyError as e:
 					print(f"Missing '{e}' column.")
 				# error handling for other errors.
@@ -140,6 +145,7 @@ def print_all_student_info():
 	for student in list_of_students:
 		# use f string to print all the info.
 		print(f"Name: {student.get_name()} ID: {student.get_ID()} Grade: {student.get_grade()} ")
+	print("The mean grade of the class is: " + mean_grade())
 
 # a method to write student info to an external file
 def write_report(file_name):
@@ -164,3 +170,12 @@ def write_report(file_name):
 	with open(file_name, "w") as file:
 		json.dump(students_data, file, indent = 4)
 	print(f"Student information has been written to {file_name}")
+
+# a method to calculate the mean grade of the class
+def mean_grade():
+	# iterate over the students in the list and add their grades to a new list called grades.
+	grades = []
+	for student in list_of_students:
+		grades.append(student.get_grade())
+	# call the mean function from statistics module to calculate the mean.
+	stats.mean(grades)

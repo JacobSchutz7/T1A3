@@ -1,16 +1,14 @@
+# class definition for assessments
 class Assessment:
 	def __init__(self, name):
 		self.name = name
 		self.marks = 0
-
+	# setters and getters for all attributes
 	def get_name(self):
 		return self.name
 	
 	def get_marks(self):
 		return self.marks
-	
-	def get_weight(self):
-		return self.weight
 	
 	def set_title(self, title):
 		self.title = title
