@@ -5,10 +5,11 @@ from methods import *
 from menu import menu
 
 def main():
+	# use a while loop to keep the program running until the users exits.
 	while True:
 		menu()
 		choice = input("Choose task: ")
-		
+		# match-case allows the user to determine what functions the program will execute.
 		match choice:
 			case '1':
 				add_students_from_file()
