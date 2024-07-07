@@ -1,8 +1,7 @@
 class Assessment:
-	def __init__(self, name, weight):
+	def __init__(self, name):
 		self.name = name
 		self.marks = 0
-		self.weight = weight
 
 	def get_name(self):
 		return self.name
@@ -18,6 +17,3 @@ class Assessment:
 
 	def set_marks(self, marks):
 		self.marks = marks
-	
-	def set_weight(self, weight):
-		self.weight = weight

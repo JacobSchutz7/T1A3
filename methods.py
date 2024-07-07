@@ -3,6 +3,7 @@ from assessment import Assessment
 from data import *
 import csv
 import json
+import statistics
 
 # method to manually add a student.
 def add_student():
@@ -75,19 +76,17 @@ def remove_student():
 def add_assessment():
 	# get input for the name of the assessment.
 	assessment_name = input("Enter assessment name: ")
-	# get input for assessment weighting.
-	weight = int(input("Enter weight: "))
 	# check that the assessment name isn't too long. 
 	if len(assessment_name) > 40:
 		print("Assessment name too long. Please enter a valid assessment name.")
 	else:
 		# create a new Assessment object.
-		new_assessment = Assessment(assessment_name, weight)
+		new_assessment = Assessment(assessment_name)
 		# add it to the list of assessment objects.
 		list_of_assessments.append(new_assessment)
 		# add the new instance of the new assessment to each student.
 		for student in list_of_students:
-			student.assessments[assessment_name] = (Assessment(assessment_name, weight))
+			student.assessments[assessment_name] = (Assessment(assessment_name))
 
 # a method for checking if an assessment exists.
 def does_assessment_exist(assessment_name):
@@ -131,7 +130,7 @@ def calculate_grade():
 		grade = 0
 		# iterate over each assessment for an individual student
 		for assessment in each.assessments:
-			grade += (assessment.mark * (assessment.weight / 100))
+			grade += assessment.mark
 		# assign the final grade
 		each.set_grade(grade)
 
@@ -144,6 +143,8 @@ def print_all_student_info():
 
 # a method to write student info to an external file
 def write_report(file_name):
+	# calculate grades before writing reports
+	calculate_grade()
 	# store data to be written in here.
 	students_data = []
 	# iterate over all students.
@@ -153,7 +154,7 @@ def write_report(file_name):
 			"Name": student.get_name(),
 			"ID": student.get_ID(),
 			"Assessments": [
-				{"Name": assessment.name, "Mark": assessment.get_marks(), "Weight": assessment.get_weight()} for name, assessment in student.assessments.items()
+				{"Name": assessment.name, "Mark": assessment.get_marks()} for name, assessment in student.assessments.items()
 			],
 			"Grade": student.get_grade()
 		}
