@@ -22,6 +22,7 @@ If the user inputs 5 into the main function, the 'write_report' function. This f
 If the user inputs 0 into the main function the program will exit. 
 ## Implementation
 [Link](https://trello.com/invite/b/88xowRSz/ATTIb9d2e315dd1e934bad02822780fd247d584AEC7E/t1a3) to my Trello board for this project.
+The features on the trello board do not match the features in the project because I had to reduce the scope of the program late in development. It was a lot more complicated than it needed to be so features are almost the same but not quite as expansive as initially planned. 
 ## Help
 ### System requirements: 
 - Python version 3.10.9 or higher
