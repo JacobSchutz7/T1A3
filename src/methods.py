@@ -27,7 +27,7 @@ def add_student():
 # add students from a csv file.
 def add_students_from_file():
 	# get the file name from the user.
-	file_name = input("Enter file name: ")
+	file_name = "data_files/" + input("Enter file name: ")
 	try:
 		# open the file.
 		with open(file_name, "r", newline="") as students_file:
@@ -145,7 +145,11 @@ def print_all_student_info():
 	for student in list_of_students:
 		# use f string to print all the info.
 		print(f"Name: {student.get_name()} ID: {student.get_ID()} Grade: {student.get_grade()} ")
-	print("The mean grade of the class is: " + mean_grade())
+	mean = mean_grade()
+	if mean == None:
+		return
+	else:
+		print(f"The mean grade of the class is: {mean}")
 
 # a method to write student info to an external file
 def write_report(file_name):
@@ -171,11 +175,20 @@ def write_report(file_name):
 		json.dump(students_data, file, indent = 4)
 	print(f"Student information has been written to {file_name}")
 
-# a method to calculate the mean grade of the class
+# a method to calculate the mean grade of the students
 def mean_grade():
 	# iterate over the students in the list and add their grades to a new list called grades.
 	grades = []
 	for student in list_of_students:
-		grades.append(student.get_grade())
-	# call the mean function from statistics module to calculate the mean.
-	stats.mean(grades)
+		if student.get_grade() > 0:
+			grades.append(student.get_grade())
+	# check that grades isn't empty to avoid error.
+	if not grades:
+		print("No grades entered. Cannot calculate mean.")
+	else:
+		try:
+			# call the mean function from statistics module to calculate the mean.
+			mean = stats.mean(grades)
+			return mean
+		except Exception as e:
+			print(f"An error occurred while calculating the mean grade: {e}")
