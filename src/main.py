@@ -1,5 +1,3 @@
-from student import Student
-from assessment import Assessment
 from data import *
 from methods import *
 from menu import menu
