@@ -20,7 +20,7 @@ def main():
 			case '4':
 				print_all_student_info()
 			case '5':
-				write_report("report.json")
+				write_report()
 			case '0':
 				print("Exiting...")
 				break

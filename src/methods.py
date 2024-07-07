@@ -28,7 +28,7 @@ def add_student():
 # add students from a csv file.
 def add_students_from_file():
 	# get the file name from the user.
-	file_name = get_path("data_files") + input("Enter file name: ")
+	file_name = get_path("data_files/") + input("Enter file name: ")
 	try:
 		# open the file.
 		with open(file_name, "r", newline="") as students_file:
